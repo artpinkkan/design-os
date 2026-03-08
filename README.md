@@ -1,54 +1,192 @@
-<img width="1280" height="640" alt="Design OS" src="https://github.com/user-attachments/assets/a9c04258-7b9a-45b6-8475-3431cdf5dbe9" />
+# Design OS (Extended Prototype)
 
-## The missing design process between your idea and your codebase.
+A **product design and planning workspace** that bridges the gap between product ideas and implementation.
 
-[Design OS](https://buildermethods.com/design-os) is a product planning and design tool that helps you define your product vision, sketch out your data shape, design your UI, and export production-ready components for implementation. Rather than jumping straight into code, you work through a guided process that captures what you're building and why—then hands off everything your coding agent needs to build it right.
+This repository extends the original **Design OS** concept with an experimental **AI Meeting Assistant prototype**, demonstrating how AI can assist teams in summarizing meetings and extracting actionable insights from transcripts.
 
-## The Problem
-
-AI coding tools are incredible at building fast. But the results often miss the mark. You describe what you want, the agent builds *something*, but it's not what you envisioned. The UI looks generic. Features get half-implemented. You spend as much time fixing and redirecting as you would have spent building.
-
-**The core issue:** we're asking coding agents to figure out what to build *and* build it simultaneously. Design decisions get made on the fly, buried in code, impossible to adjust without starting over. There's no spec. No shared understanding. No source of truth for what "done" looks like.
-
-## The Design OS Process
-
-Design OS powers a guided design and architecture process. You + AI, working together through structured steps:
-
-1. **Product Planning** — Define your vision, break down your roadmap, and model your data
-2. **Design System** — Choose colors, typography, and design your application shell
-3. **Section Design** — For each feature area: specify requirements, generate sample data, and design the screens
-4. **Export** — Generate a complete handoff package for implementation
-
-Each step is a conversation. The AI asks questions, you provide direction, and together you shape a product that matches your vision—before any implementation begins.
+The goal is to explore how **AI-assisted product workflows** can support planning, design, and team collaboration.
 
 ---
 
-## Documentation & Installation
+# Overview
 
-Docs, installation, usage, & best practices 👉 [It's all here](https://buildermethods.com/design-os)
+Design OS provides a structured workflow for defining a product before writing code.
+
+Instead of jumping directly into implementation, the system guides you through a step-by-step process:
+
+1. **Product Definition**  
+   Define the product vision and identify core problems.
+
+2. **Data Shape Modeling**  
+   Describe how data should be structured in the application.
+
+3. **Design System Setup**  
+   Configure colors, typography, and application layout.
+
+4. **Feature Section Design**  
+   Design feature flows and UI screens.
+
+5. **Export & Implementation Handoff**  
+   Prepare artifacts that can be used for development.
+
+This repository also includes a **prototype AI Meeting Assistant** that can summarize meeting transcripts and extract action items.
 
 ---
 
-## Support, Training & Community
+# AI Meeting Assistant (Prototype)
 
-For official support, training, and community as you use Design OS—for yourself or with your team, consider joining _Builder Methods Pro_. You'll get access to Brian Casel (the creator) for questions, a community of builders using Design OS, plus all Builder Methods workshops and training on AI-first development.
+The AI Meeting Assistant allows users to:
 
-👉 [Join Builder Methods Pro](https://buildermethods.com/pro)
+- Upload or paste meeting transcripts  
+- Process `.vtt` transcript files  
+- Generate AI summaries  
+- Extract actionable tasks from discussions  
+
+This feature uses the **OpenAI API** to analyze transcripts and produce structured outputs.
+
+Example output:
+
+```
+Meeting Summary
+The team discussed progress on modules 1–5 and aligned priorities for upcoming integration work.
+
+Action Items
+1. Ensure modules 1–5 are completed by end of April
+2. Integrate feedback from SBU
+3. Conduct testing for new features
+```
 
 ---
 
-## Follow updates & releases
+# Tech Stack
 
-Read the [changelog](CHANGELOG.md)
+This project is built with:
 
-[Subscribe to be notified of major new releases of Design OS](https://buildermethods.com/design-os)
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- OpenAI API
 
 ---
 
-## Created by Brian Casel @ Builder Methods
+# Installation
 
-Created by Brian Casel, the creator of [Builder Methods](https://buildermethods.com), where Brian helps professional software developers and teams build with AI.
+Clone the repository:
 
-Get Brian's free resources on building with AI:
-- [Builder Briefing newsletter](https://buildermethods.com)
-- [YouTube](https://youtube.com/@briancasel)
+```bash
+git clone https://github.com/artpinkkan/design-os.git
+cd design-os
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+# Environment Setup
+
+Create an `.env` file in the root directory:
+
+```
+VITE_OPENAI_API_KEY=your_openai_api_key
+```
+
+You can generate an API key at:
+
+https://platform.openai.com/api-keys
+
+---
+
+# Run the Development Server
+
+Start the application:
+
+```bash
+npm run dev
+```
+
+The app will run at:
+
+```
+http://localhost:3000
+```
+
+---
+
+# Using the AI Meeting Assistant
+
+1. Navigate to the **AI Meeting Assistant** page
+2. Paste a meeting transcript or upload a `.vtt` file
+3. Click **Generate Summary**
+4. The AI will produce:
+
+- Meeting Summary
+- Action Items
+
+---
+
+# Example Transcript Format
+
+The system works best with transcripts formatted like:
+
+```
+Andre: We need to finalize module 5 by April.
+Sarah: Integration testing should begin next week.
+```
+
+`.vtt` transcripts will automatically be cleaned before processing.
+
+---
+
+# Project Structure
+
+```
+src
+ ├ components
+ │   └ MeetingAssistantDashboard.tsx
+ │
+ ├ lib
+ │   └ ai.ts
+ │
+ ├ assets
+ └ main.tsx
+```
+
+Important modules:
+
+**ai.ts**  
+Handles OpenAI integration and transcript processing.
+
+**MeetingAssistantDashboard.tsx**  
+Main UI for transcript input and summary generation.
+
+---
+
+# Future Improvements
+
+Planned improvements for this prototype include:
+
+- Speaker-aware transcript parsing  
+- Topic segmentation for meetings  
+- AI-powered Q&A about meeting discussions  
+- Export meeting summaries to PDF / Notion  
+- Real-time meeting summarization  
+
+---
+
+# Acknowledgements
+
+This project builds on the original **Design OS concept by Brian Casel**.
+
+Original repository:  
+https://github.com/buildermethods/design-os
+
+---
+
+# License
+
+MIT License
