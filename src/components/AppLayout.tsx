@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { Layers, ArrowLeft } from 'lucide-react'
 import { PhaseNav } from './PhaseNav'
 import { ThemeToggle } from './ThemeToggle'
@@ -25,6 +25,8 @@ export function AppLayout({
   showPhaseNav = true,
 }: AppLayoutProps) {
   const navigate = useNavigate()
+  const location = useLocation()
+  const isDashboard = location.pathname === '/dashboard'
 
   // Determine if this is a sub-page (has back navigation)
   const isSubPage = !!backTo
@@ -88,7 +90,7 @@ export function AppLayout({
       </main>
 
       {/* Footer with logo */}
-      <footer className="py-8 flex justify-center">
+      <footer className="py-8 flex flex-col items-center gap-3">
         <a
           href="https://buildermethods.com/design-os"
           target="_blank"
@@ -101,6 +103,14 @@ export function AppLayout({
           </div>
           <span className="text-xs font-medium">Design OS</span>
         </a>
+        {!isDashboard && (
+          <Link
+            to="/dashboard"
+            className="text-xs text-stone-400 dark:text-stone-500 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
+          >
+            Demo: AI Meeting Assistant Dashboard
+          </Link>
+        )}
       </footer>
     </div>
   )

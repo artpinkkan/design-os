@@ -7,11 +7,16 @@ import { SectionPage } from '@/components/SectionPage'
 import { ScreenDesignPage, ScreenDesignFullscreen } from '@/components/ScreenDesignPage'
 import { ShellDesignPage, ShellDesignFullscreen } from '@/components/ShellDesignPage'
 import { ExportPage } from '@/components/ExportPage'
+import { MeetingAssistantDashboard } from '@/components/MeetingAssistantDashboard'
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <ProductPage />,
+  },
+  {
+    path: '/dashboard',
+    element: <MeetingAssistantDashboard />,
   },
   {
     path: '/data-shape',
