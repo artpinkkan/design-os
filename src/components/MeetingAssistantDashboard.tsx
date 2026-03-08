@@ -10,6 +10,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
+import { generateMeetingSummary, parseAIResult } from '@/lib/ai'
+
 export function MeetingAssistantDashboard() {
   const [transcript, setTranscript] = useState('')
   const [transcriptFileName, setTranscriptFileName] = useState<string | null>(null)
@@ -50,38 +52,30 @@ export function MeetingAssistantDashboard() {
     reader.readAsText(file)
   }
 
-  const handleGenerateSummary = (event: FormEvent) => {
-    event.preventDefault()
-
+  const handleGenerateSummary = async (e: React.FormEvent) => {
+    e.preventDefault()
+  
+    console.log("Generate button clicked")
+  
     setIsGenerating(true)
-    setHasGenerated(false)
-
-    const baseSummary =
-      transcript.trim() ||
-      'This meeting focused on key updates, decisions, and next steps for the team.'
-
-    const firstSentenceMatch = baseSummary.match(/^(.+?[.!?])(\s|$)/)
-    const firstSentence = firstSentenceMatch ? firstSentenceMatch[1] : baseSummary
-    const trimmedSummary =
-      firstSentence.length > 260 ? `${firstSentence.slice(0, 257).trimEnd()}...` : firstSentence
-
-    const sampleActions = [
-      'Share a concise recap and decisions with all attendees.',
-      'Document open risks and assign owners for each.',
-      'Update the project plan with new milestones and deadlines.',
-      'Schedule a follow-up meeting to review progress on action items.',
-      'Capture key decisions in the team knowledge base.',
-    ]
-
-    const itemCount = 3 + Math.floor(Math.random() * 3) // 3–5 items
-    const generatedActions = sampleActions.slice(0, itemCount)
-
-    window.setTimeout(() => {
-      setSummary(trimmedSummary)
-      setActionItems(generatedActions)
-      setIsGenerating(false)
+  
+    try {
+      const result = await generateMeetingSummary(transcript)
+  
+      const parsed = parseAIResult(result)
+  
+      setSummary(parsed.summary)
+      setActionItems(parsed.actions)
+  
+      console.log("AI RESULT:", result)
+  
       setHasGenerated(true)
-    }, 700)
+  
+    } catch (error) {
+      console.error("AI ERROR:", error)
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   return (
